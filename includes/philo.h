@@ -50,4 +50,5 @@ typedef struct s_simulation
 
 t_sim_config    parse_arguments(int argc, char** argv);
 int				is_within_uint_range(long number);
+int				is_valid_unumber(char *str);
 int				strtoui(const char *str, int *error);
