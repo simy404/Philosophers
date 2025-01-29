@@ -7,7 +7,7 @@ typedef struct s_critical_section
 	pthread_mutex_t		*mutex;
 	void				*data;
 }						t_critical_section;
-
+ 
 typedef struct s_sim_config
 {
 	int					philo_count;
