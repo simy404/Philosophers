@@ -15,15 +15,15 @@
 
 int	main(int argc, char **argv)
 {
-	t_simulation *simulation;
+	// t_simulation *simulation;
 	t_sim_config config;
-	
+
 	if (argc != 5 && argc != 6)
 		return (printf(ARGUMENT_ERROR));
 	config = parse_arguments(argc,argv);
 	if (config.err)
 		return (printf(ARGUMENT_ERROR));
-	simulation = initialize_simulation(config);
-	
+	// simulation = initialize_simulation(config);
+
 	printf("<philos:%d> <t_die:%d> <t_eat:%d> <t_sleep:%d> [eat_count:%d], err check:%d\n", config.philo_count,config.die_time_ms,config.eat_time_ms,config.sleep_time_ms,config.max_meals,config.err);
 }
