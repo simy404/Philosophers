@@ -10,12 +10,12 @@ typedef struct s_critical_section
  
 typedef struct s_sim_config
 {
+	int					err;
 	int					philo_count;
 	int					die_time_ms;
 	int					eat_time_ms;
 	int					sleep_time_ms;
 	int					max_meals;
-	int					err;
 }						t_sim_config;
 
 typedef struct			s_simulation t_simulation;

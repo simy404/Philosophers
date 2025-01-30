@@ -6,7 +6,7 @@
 /*   By: hsamir <hsamir@student.42kocaeli.com.tr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 15:14:21 by hsamir            #+#    #+#             */
-/*   Updated: 2025/01/28 20:00:24 by hsamir           ###   ########.fr       */
+/*   Updated: 2025/01/29 17:54:53 by hsamir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ int parse_uint(char* str, int* err)
 t_sim_config    parse_arguments(int argc, char** argv)
 {        
     t_sim_config config;
-   
+    
+    config.max_meals = -1;
     config.err = 0; 
     config.max_meals = -1;
     config.philo_count = parse_uint(argv[1], &config.err);
@@ -38,7 +39,6 @@ t_sim_config    parse_arguments(int argc, char** argv)
     config.eat_time_ms = parse_uint(argv[3], &config.err);
     config.sleep_time_ms = parse_uint(argv[4], &config.err);
     if (argc == 6)
-        config.max_meals = parse_uint(argv[5], &config.err);
+        config.max_meals = parse_uint(argv[5], &config.err); 
     return (config);
 }
-
