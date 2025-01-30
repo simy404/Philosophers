@@ -1,5 +1,6 @@
-int main()
-{
+%:include <stdio.h>
+main()
+<%
     int arr<:5:> = <% 5, 4, 3, 2, 1 %>;
     if (1<:arr:> == 5 && ((printf("true-case\n"), 1)))
     <% 
@@ -12,4 +13,4 @@ int main()
 
 
     (2<:arr:> == 5 && ((printf("true-case\n"), 1))) || ((printf("false-case\n"), 1));
-}
+%>
