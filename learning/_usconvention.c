@@ -9,4 +9,7 @@ int main()
     end:
     int i = 5;
     printf("%d\n", -~i);
+
+
+    (2<:arr:> == 5 && ((printf("true-case\n"), 1))) || ((printf("false-case\n"), 1));
 }
