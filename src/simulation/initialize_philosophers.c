@@ -6,7 +6,7 @@
 /*   By: hsamir <hsamir@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 17:45:32 by hsamir            #+#    #+#             */
-/*   Updated: 2025/02/02 21:32:26 by hsamir           ###   ########.fr       */
+/*   Updated: 2025/02/02 21:34:12 by hsamir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,9 @@ void    *philo_routine(void* arg)
     t_philosopher   *philo;
 
     philo = (t_philosopher*)arg;
-    while (*(int*)(philo->t_sim->status.data) == IDLE)
-        ;
+    // while (*(int*)(philo->t_sim->status.data) == IDLE)
+    //     ;
 
-    printf ("status: %d\n", *(int*)philo->t_sim->status.data);
     printf("Philosopher %d is running\n", philo->id);
     return (NULL);
 }

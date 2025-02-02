@@ -6,12 +6,44 @@
 /*   By: hsamir <hsamir@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 20:24:18 by hsamir            #+#    #+#             */
-/*   Updated: 2025/02/02 21:27:42 by hsamir           ###   ########.fr       */
+/*   Updated: 2025/02/02 21:43:28 by hsamir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/philo.h"
 #include <stdlib.h>
+
+void abort_forks(pthread_mutex_t *fork_mutexes, int fork_count)
+{
+    int i;
+
+    i = 0;
+    while (i < fork_count)
+    {
+        pthread_mutex_destroy(fork_mutexes + i);
+        i++;
+    }
+    free(fork_mutexes);
+}
+
+pthread_mutex_t* initialize_forks(int fork_count)
+{
+    pthread_mutex_t *fork_mutexes;
+    int i;
+
+    fork_mutexes = malloc(sizeof(pthread_mutex_t) * fork_count);
+    i = 0;
+    while (i < fork_count)
+    {
+        if (pthread_mutex_init(fork_mutexes + i, NULL))
+        {
+            abort_forks(fork_mutexes, i);
+            return (NULL);
+        }
+        i++;
+    }
+    return (fork_mutexes);
+}
 
 t_simulation    *initialize_simulation(t_sim_config config)
 {
@@ -28,11 +60,11 @@ t_simulation    *initialize_simulation(t_sim_config config)
     if (!init_cs(&simulation->status, sizeof(int)))
         return (free(simulation), NULL);
     *(int *)(simulation->status.data) = IDLE;
-    // simulation->fork_mutexes = initialize_forks(simulation->philo_count);
-    // if (!simulation->fork_mutexes)
-    //     return (free(simulation), NULL);
+    simulation->fork_mutexes = initialize_forks(simulation->philo_count);
+    if (!simulation->fork_mutexes)
+        return (free(simulation), NULL);
     simulation->philos = initialize_philos(simulation);
     if (!simulation->philos)
-        return (free(simulation), NULL);
+        return (abort_forks(simulation->fork_mutexes, simulation->philo_count), free(simulation), NULL);
    return (simulation);
 }
