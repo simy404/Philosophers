@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hsamir <hsamir@student.42kocaeli.com.tr>   +#+  +:+       +#+         #
+#    By: hsamir <hsamir@student.42kocaeli.com.tr    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/28 16:30:09 by hsamir            #+#    #+#              #
-#    Updated: 2025/01/30 12:10:36 by hsamir           ###   ########.fr        #
+#    Updated: 2025/02/02 17:03:23 by hsamir           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,6 +15,8 @@ SRC = main.c \
 src/parser/args_parser.c \
 src/utils/convertion_util.c \
 src/utils/input_validation_util.c \
+src/utils/critical_section_utils.c \
+src/utils/abort_utils.c \
 
 CC = clang
 CFLAGS = -Wall -Wextra -Werror -g

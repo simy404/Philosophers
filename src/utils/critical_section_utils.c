@@ -3,38 +3,82 @@
 /*                                                        :::      ::::::::   */
 /*   critical_section_utils.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsamir <hsamir@student.42kocaeli.com.tr>   +#+  +:+       +#+        */
+/*   By: hsamir <hsamir@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 19:50:38 by hsamir            #+#    #+#             */
-/*   Updated: 2025/01/29 19:59:50 by hsamir           ###   ########.fr       */
+/*   Updated: 2025/02/02 17:23:47 by hsamir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/philo.h"
+#include <stdlib.h>
 
-t_critical_section *create_cs(int data, int size)
+#include <stddef.h>
+
+void *ft_memcpy(void *dest, const void *src, size_t n)
 {
-    t_critical_section *cs;
+    size_t i;
+    unsigned char *d;
+    unsigned char *s;
 
-    cs = malloc(sizeof(t_critical_section));
-    if(!cs)
+    if (!dest && !src)
+        return (0);
+    d = (unsigned char *)dest;
+    s = (unsigned char *)src;
+    i = 0;
+    while (i < n)
+    {
+        d[i] = s[i];
+        i++;
+    }
+    return (dest);
+}
+
+pthread_mutex_t	*create_mutex()
+{
+    pthread_mutex_t	*mutex;
+
+    mutex = malloc(sizeof(pthread_mutex_t));
+    if (!mutex)
         return (NULL);
-    cs->data = data;
-    if (pthread_mutex_init(cs->mutex, NULL));
-        return (free(cs)); //TODO I have to make safe free for that
-    return (cs);
+    if (pthread_mutex_init(mutex, NULL))
+    {
+        free(mutex);
+        return (NULL);
+    }
+    return (mutex);
 }
 
-int get_cs(t_critical_section *cs)
+int	init_cs(t_critical_section *cs, int size)
 {
-    pthread_mutex_lock(cs->mutex);
-        
-    pthread_mutex_unlock(cs->mutex);
+    cs->data = malloc(size);
+    if (!cs->data)
+        return (FAILURE);
+    cs->mutex = create_mutex();
+    if (!cs->mutex)
+    {
+        abort_cs(cs);
+        return (FAILURE);
+    }
+    return (SUCCESS);
 }
 
-
-
-int set_cs()
+int	read_cs_data(t_critical_section *cs, void *data)
 {
-    
+    if (pthread_mutex_lock(cs->mutex))
+        return (FAILURE);
+    ft_memcpy(data, cs->data, sizeof(cs->data));
+    if (pthread_mutex_unlock(cs->mutex))
+        return (FAILURE);
+    return (SUCCESS);
+}
+
+int	write_cs_data(t_critical_section *cs, void *data)
+{
+    if (pthread_mutex_lock(cs->mutex))
+        return (FAILURE);
+    ft_memcpy(cs->data, data, sizeof(cs->data));
+    if (pthread_mutex_unlock(cs->mutex))
+        return (FAILURE);
+    return (SUCCESS);
 }
