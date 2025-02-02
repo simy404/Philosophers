@@ -6,17 +6,24 @@
 /*   By: hsamir <hsamir@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 17:45:32 by hsamir            #+#    #+#             */
-/*   Updated: 2025/02/02 21:19:02 by hsamir           ###   ########.fr       */
+/*   Updated: 2025/02/02 21:32:26 by hsamir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/philo.h"
 #include <stdlib.h>
 #include <stdio.h>
-void* philo_routine(void* arg)
+
+void    *philo_routine(void* arg)
 {
-    //TODO implement philo_routine
-    printf("philo_routine:%p\n", arg);
+    t_philosopher   *philo;
+
+    philo = (t_philosopher*)arg;
+    while (*(int*)(philo->t_sim->status.data) == IDLE)
+        ;
+
+    printf ("status: %d\n", *(int*)philo->t_sim->status.data);
+    printf("Philosopher %d is running\n", philo->id);
     return (NULL);
 }
 
