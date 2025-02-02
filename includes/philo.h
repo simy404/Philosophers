@@ -40,10 +40,10 @@ typedef enum e_status
 
 typedef struct s_simulation
 {
-	t_philosopher		*philos;
+	t_philosopher		**philos;
 	pthread_mutex_t		*fork_mutexes;
-	t_status			status;
-	unsigned int		philo_count;
+	t_critical_section	status;
+	int					philo_count;
 	int					die_time_ms;
 	int					eat_time_ms;
 	int					sleep_time_ms;
@@ -62,3 +62,6 @@ int	write_cd_data(t_critical_section *cs, void *data);
 
 void abort_philos(t_philosopher   **philos, int philo_count);
 void abort_cs(t_critical_section *cs);
+
+t_simulation    *initialize_simulation(t_sim_config config);
+t_philosopher   **initialize_philos(t_simulation *simulation);

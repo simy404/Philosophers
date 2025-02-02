@@ -6,13 +6,20 @@
 /*   By: hsamir <hsamir@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 17:45:32 by hsamir            #+#    #+#             */
-/*   Updated: 2025/02/02 17:45:57 by hsamir           ###   ########.fr       */
+/*   Updated: 2025/02/02 21:19:02 by hsamir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/philo.h"
+#include <stdlib.h>
+#include <stdio.h>
+void* philo_routine(void* arg)
+{
+    //TODO implement philo_routine
+    printf("philo_routine:%p\n", arg);
+    return (NULL);
+}
 
-void* philo_routine(void*);
 
 t_philosopher   *initialize_philo(int id, t_simulation *simulation)
 {
@@ -23,7 +30,7 @@ t_philosopher   *initialize_philo(int id, t_simulation *simulation)
         return (NULL);
     philo->id = id;
     philo->t_sim = simulation;
-    if (!pthread_create(&philo->thread, NULL, philo_routine, philo))
+    if (pthread_create(&philo->thread, NULL, philo_routine, philo))
             return (free(philo), NULL);
     if (!init_cs(&philo->eat_count, sizeof(int)))
         return (free(philo), NULL);
@@ -37,7 +44,7 @@ t_philosopher   **initialize_philos(t_simulation *simulation)
     t_philosopher   **philos;
     int              i;
 
-    philos = malloc(sizeof(t_philosopher*) * simulation->philo_count + 1);
+    philos = malloc(sizeof(t_philosopher*) * (simulation->philo_count + 1));
     if (!philos)
         return (NULL);
     i = 0;
@@ -46,6 +53,7 @@ t_philosopher   **initialize_philos(t_simulation *simulation)
         philos[i] = initialize_philo(i + 1, simulation);
         if (!philos[i])
             return (abort_philos(philos, i), NULL);
+        i++;
     }
     philos[i] = NULL;
     return (philos);
