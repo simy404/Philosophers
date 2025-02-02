@@ -57,6 +57,8 @@ int				strtoui(const char *str, int *error);
 
 
 int	init_cs(t_critical_section *cs , int size);
-void abort_cs(t_critical_section *cs);
 int	read_cs_data(t_critical_section *cs, void *data);
 int	write_cd_data(t_critical_section *cs, void *data);
+
+void abort_philos(t_philosopher   **philos, int philo_count);
+void abort_cs(t_critical_section *cs);
