@@ -6,7 +6,7 @@
 /*   By: hsamir <hsamir@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 13:07:58 by hsamir            #+#    #+#             */
-/*   Updated: 2025/02/03 18:55:39 by hsamir           ###   ########.fr       */
+/*   Updated: 2025/02/03 22:20:50 by hsamir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,16 @@ int philo_eat(t_philosopher* philo)
 	pthread_mutex_t *left;
 	pthread_mutex_t *right;
 
-	left = &philo->sim->fork_mutexes[philo->id - 1];
-	right = &philo->sim->fork_mutexes[philo->id % philo->sim->philo_count];
+	if (philo->id % 2)
+	{
+		left = &philo->sim->fork_mutexes[philo->id - 1];
+		right = &philo->sim->fork_mutexes[philo->id % philo->sim->philo_count];
+	}
+	else
+	{
+		left = &philo->sim->fork_mutexes[philo->id % philo->sim->philo_count];
+		right = &philo->sim->fork_mutexes[philo->id - 1];
+	}
 	if (left == right)
 		return (FAILURE); //TODO philo count is 1;
 	if (pthread_mutex_lock(left))
