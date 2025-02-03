@@ -6,7 +6,7 @@
 #    By: hsamir <hsamir@student.42kocaeli.com.tr    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/28 16:30:09 by hsamir            #+#    #+#              #
-#    Updated: 2025/02/03 11:06:22 by hsamir           ###   ########.fr        #
+#    Updated: 2025/02/03 12:44:08 by hsamir           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,8 +17,8 @@ src/utils/convertion_util.c \
 src/utils/input_validation_util.c \
 src/utils/critical_section_utils.c \
 src/utils/abort_utils.c \
+src/simulation/initialize_philosophers.c \
 src/simulation/initialize_simulation.c \
-src/simulation/initialize_philosophers.c
 
 CC = clang
 CFLAGS = -Wall -Wextra -Werror -g -fsanitize=thread

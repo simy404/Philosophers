@@ -6,37 +6,12 @@
 /*   By: hsamir <hsamir@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 17:45:32 by hsamir            #+#    #+#             */
-/*   Updated: 2025/02/03 11:07:27 by hsamir           ###   ########.fr       */
+/*   Updated: 2025/02/03 13:11:45 by hsamir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/philo.h"
 #include <stdlib.h>
-#include <stdio.h>
-#include <sys/time.h>
-
-long long current_time_ms() {
-    struct timeval tv;
-    gettimeofday(&tv, NULL);
-    return tv.tv_sec * 1000LL + tv.tv_usec / 1000; // Milisaniye cinsine çevir
-}
-
-void    *philo_routine(void* arg)
-{
-    t_philosopher   *philo;
-	int status;
-
-	status = IDLE;
-    philo = (t_philosopher*)arg;
-
-    while (read_cs_data(&philo->sim->status, &status, sizeof(int)) && status == IDLE)
-        ;
-	// while (*((int*)philo->sim->status.data) == IDLE)
-	// 	;
-    printf("Philosopher %d is running - current time %lld\n", philo->id, current_time_ms());
-    return (NULL);
-}
-
 
 t_philosopher   *initialize_philo(int id, t_simulation *simulation)
 {

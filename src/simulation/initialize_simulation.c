@@ -6,7 +6,7 @@
 /*   By: hsamir <hsamir@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 20:24:18 by hsamir            #+#    #+#             */
-/*   Updated: 2025/02/03 11:09:35 by hsamir           ###   ########.fr       */
+/*   Updated: 2025/02/03 12:41:19 by hsamir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	start_simulation(t_simulation *simulation)
 	int status;
 
 	status = RUNNING;
-	write_cd_data(&simulation->status, &status, sizeof(int));
+	write_cs_data(&simulation->status, &status, sizeof(int));
 	i = 0;
 	while (i < simulation->philo_count)
 	{
