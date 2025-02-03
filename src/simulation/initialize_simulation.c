@@ -6,18 +6,20 @@
 /*   By: hsamir <hsamir@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 20:24:18 by hsamir            #+#    #+#             */
-/*   Updated: 2025/02/03 12:41:19 by hsamir           ###   ########.fr       */
+/*   Updated: 2025/02/03 15:38:10 by hsamir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/philo.h"
 #include <stdlib.h>
+#include <time.h>
 
 int	start_simulation(t_simulation *simulation)
 {
 	int i;
 	int status;
 
+	simulation->start_time = current_time_ms();
 	status = RUNNING;
 	write_cs_data(&simulation->status, &status, sizeof(int));
 	i = 0;

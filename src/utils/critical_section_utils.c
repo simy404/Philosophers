@@ -6,14 +6,12 @@
 /*   By: hsamir <hsamir@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 19:50:38 by hsamir            #+#    #+#             */
-/*   Updated: 2025/02/03 10:43:16 by hsamir           ###   ########.fr       */
+/*   Updated: 2025/02/03 17:26:10 by hsamir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/philo.h"
 #include <stdlib.h>
-
-#include <stddef.h>
 
 void *ft_memcpy(void *dest, const void *src, size_t n)
 {

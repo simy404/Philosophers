@@ -6,7 +6,7 @@
 #    By: hsamir <hsamir@student.42kocaeli.com.tr    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/28 16:30:09 by hsamir            #+#    #+#              #
-#    Updated: 2025/02/03 12:44:08 by hsamir           ###   ########.fr        #
+#    Updated: 2025/02/03 18:44:13 by hsamir           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,9 +19,11 @@ src/utils/critical_section_utils.c \
 src/utils/abort_utils.c \
 src/simulation/initialize_philosophers.c \
 src/simulation/initialize_simulation.c \
+src/simulation/philo_routine.c \
+src/utils/time_utils.c
 
 CC = clang
-CFLAGS = -Wall -Wextra -Werror -g -fsanitize=thread
+CFLAGS = -Wall -Wextra -Werror -g #-fsanitize=thread
 OBJ = $(SRC:.c=.o)
 
 all: $(NAME)

@@ -6,46 +6,77 @@
 /*   By: hsamir <hsamir@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 13:07:58 by hsamir            #+#    #+#             */
-/*   Updated: 2025/02/03 13:17:49 by hsamir           ###   ########.fr       */
+/*   Updated: 2025/02/03 18:55:39 by hsamir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/philo.h"
 #include <sys/time.h>
+#include <stdio.h>
+#include <unistd.h>
 
-int philo_eat(t_philosopher* philo);
+int philo_eat(t_philosopher* philo)
 {
+	pthread_mutex_t *left;
+	pthread_mutex_t *right;
+
+	left = &philo->sim->fork_mutexes[philo->id - 1];
+	right = &philo->sim->fork_mutexes[philo->id % philo->sim->philo_count];
+	if (left == right)
+		return (FAILURE); //TODO philo count is 1;
+	if (pthread_mutex_lock(left))
+		return (FAILURE);
+	printf("%lld %d has taken a fork\n", (current_time_ms() -  philo->sim->start_time) , philo->id);
+	if (pthread_mutex_lock(right))
+	{
+		pthread_mutex_unlock(left);
+		return (FAILURE);
+	}
+	printf("%lld %d has taken a fork\n", (current_time_ms() -  philo->sim->start_time) , philo->id);
+	printf("%lld %d is eating\n", (current_time_ms() -  philo->sim->start_time) , philo->id);
+	msleep(philo->sim->eat_time_ms);
+	if (pthread_mutex_unlock(right))
+		return (FAILURE);
+	if (pthread_mutex_unlock(left))
+		return (FAILURE);
+	return (SUCCESS);
+}
+
+int philo_sleep(t_philosopher *philo)
+{
+	printf("%lld %d is sleeping\n", (current_time_ms() -  philo->sim->start_time) , philo->id);
+	msleep(philo->sim->sleep_time_ms);
 	return 0;
 }
 
-int philo_sleep()
+int philo_think(t_philosopher *philo)
 {
+	printf("%lld %d is thinking\n", (current_time_ms() -  philo->sim->start_time) , philo->id);
+	msleep((philo->sim->die_time_ms - (philo->sim->sleep_time_ms + philo->sim->eat_time_ms ) / 2));
 	return 0;
-}
-
-int philo_think()
-{
-	return 0;
-}
-
-long long current_time_ms() {
-    struct timeval tv;
-    gettimeofday(&tv, NULL);
-    return tv.tv_sec * 1000LL + tv.tv_usec / 1000; // Milisaniye cinsine çevir
 }
 
 void    *philo_routine(void* arg)
 {
-    t_philosopher   *philo;
-	int status;
+	t_philosopher	*philo;
+	int				status;
 
 	status = IDLE;
-    philo = (t_philosopher*)arg;
-
-    while (read_cs_data(&philo->sim->status, &status, sizeof(int)) && status == IDLE)
-        ;
-	// while (*((int*)philo->sim->status.data) == IDLE)
-	// 	;
-    printf("Philosopher %d is running - current time %lld\n", philo->id, current_time_ms());
-    return (NULL);
+	philo = (t_philosopher*)arg;
+	while (read_cs_data(&philo->sim->status, &status, sizeof(int)) && status == IDLE)
+		;
+	if (philo->id % 2)
+		usleep(1000);
+	while (read_cs_data(&philo->sim->status, &status, sizeof(int)) && status == RUNNING)
+	{
+		philo_eat(philo);
+		if (read_cs_data(&philo->sim->status, &status, sizeof(int)) && status == TERMINATED)
+			break;
+		philo_sleep(philo);
+		if (read_cs_data(&philo->sim->status, &status, sizeof(int)) && status == TERMINATED)
+			break;
+		philo_think(philo);
+	}
+	printf("Philosopher %d is running - current time %lld\n", philo->id, current_time_ms());
+	return (NULL);
 }
