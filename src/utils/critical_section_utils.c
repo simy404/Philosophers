@@ -6,7 +6,7 @@
 /*   By: hsamir <hsamir@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 19:50:38 by hsamir            #+#    #+#             */
-/*   Updated: 2025/02/02 17:23:47 by hsamir           ###   ########.fr       */
+/*   Updated: 2025/02/03 10:43:16 by hsamir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,21 +63,21 @@ int	init_cs(t_critical_section *cs, int size)
     return (SUCCESS);
 }
 
-int	read_cs_data(t_critical_section *cs, void *data)
+int	read_cs_data(t_critical_section *cs, void *data, int size)
 {
     if (pthread_mutex_lock(cs->mutex))
         return (FAILURE);
-    ft_memcpy(data, cs->data, sizeof(cs->data));
+    ft_memcpy(data, cs->data, sizeof(size));
     if (pthread_mutex_unlock(cs->mutex))
         return (FAILURE);
     return (SUCCESS);
 }
 
-int	write_cs_data(t_critical_section *cs, void *data)
+int	write_cs_data(t_critical_section *cs, void *data, int size)
 {
     if (pthread_mutex_lock(cs->mutex))
         return (FAILURE);
-    ft_memcpy(cs->data, data, sizeof(cs->data));
+    ft_memcpy(cs->data, data, sizeof(size));
     if (pthread_mutex_unlock(cs->mutex))
         return (FAILURE);
     return (SUCCESS);

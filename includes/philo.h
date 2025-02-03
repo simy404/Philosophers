@@ -26,7 +26,7 @@ typedef struct s_philosopher
 {
 	unsigned int		id;
 	pthread_t			thread;
-	t_simulation		*t_sim;
+	t_simulation		*sim;
 	t_critical_section	eat_count;
 	t_critical_section	last_meal_time;
 }						t_philosopher;
@@ -57,8 +57,8 @@ int					strtoui(const char *str, int *error);
 
 
 int					init_cs(t_critical_section *cs , int size);
-int					read_cs_data(t_critical_section *cs, void *data);
-int					write_cd_data(t_critical_section *cs, void *data);
+int					read_cs_data(t_critical_section *cs, void *data, int size);
+int					write_cd_data(t_critical_section *cs, void *data, int size);
 
 void				abort_philos(t_philosopher   **philos, int philo_count);
 void				abort_forks(pthread_mutex_t *fork_mutexes, int fork_count);
