@@ -50,18 +50,21 @@ typedef struct s_simulation
 	int					max_meals;
 }						t_simulation;
 
-t_sim_config    parse_arguments(int argc, char** argv);
-int				is_within_uint_range(long number);
-int				is_valid_unumber(char *str);
-int				strtoui(const char *str, int *error);
+t_sim_config    	parse_arguments(int argc, char** argv);
+int					is_within_uint_range(long number);
+int					is_valid_unumber(char *str);
+int					strtoui(const char *str, int *error);
 
 
-int	init_cs(t_critical_section *cs , int size);
-int	read_cs_data(t_critical_section *cs, void *data);
-int	write_cd_data(t_critical_section *cs, void *data);
+int					init_cs(t_critical_section *cs , int size);
+int					read_cs_data(t_critical_section *cs, void *data);
+int					write_cd_data(t_critical_section *cs, void *data);
 
-void abort_philos(t_philosopher   **philos, int philo_count);
-void abort_cs(t_critical_section *cs);
+void				abort_philos(t_philosopher   **philos, int philo_count);
+void				abort_forks(pthread_mutex_t *fork_mutexes, int fork_count);
+void				abort_cs(t_critical_section *cs);
+void				abort_simulation(t_simulation *simulation);
 
-t_simulation    *initialize_simulation(t_sim_config config);
-t_philosopher   **initialize_philos(t_simulation *simulation);
+t_simulation		*initialize_simulation(t_sim_config config);
+t_philosopher		**initialize_philos(t_simulation *simulation);
+int					start_simulation(t_simulation *simulation);
