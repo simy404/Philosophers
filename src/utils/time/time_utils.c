@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   time_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsamir <hsamir@student.42kocaeli.com.tr    +#+  +:+       +#+        */
+/*   By: hsamir <hsamir@student.42kocaeli.com.tr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 17:21:16 by hsamir            #+#    #+#             */
-/*   Updated: 2025/02/03 18:30:36 by hsamir           ###   ########.fr       */
+/*   Updated: 2025/02/04 23:37:11 by hsamir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,4 +37,9 @@ void	msleep(unsigned long long time)
 	usleep((time * 1000 - 10000));
 	while (current_time_us() - start_time < time * 1000)
 		;
+}
+
+long long get_time_diff(long long start_time)
+{
+	return current_time_ms() - start_time;
 }

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   critical_section_utils.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsamir <hsamir@student.42kocaeli.com.tr    +#+  +:+       +#+        */
+/*   By: hsamir <hsamir@student.42kocaeli.com.tr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 19:50:38 by hsamir            #+#    #+#             */
-/*   Updated: 2025/02/03 17:26:10 by hsamir           ###   ########.fr       */
+/*   Updated: 2025/02/05 00:39:34 by hsamir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/philo.h"
+#include "../../../includes/philo.h"
 #include <stdlib.h>
 
 void *ft_memcpy(void *dest, const void *src, size_t n)
@@ -65,7 +65,7 @@ int	read_cs_data(t_critical_section *cs, void *data, int size)
 {
     if (pthread_mutex_lock(cs->mutex))
         return (FAILURE);
-    ft_memcpy(data, cs->data, sizeof(size));
+    ft_memcpy(data, cs->data, size);
     if (pthread_mutex_unlock(cs->mutex))
         return (FAILURE);
     return (SUCCESS);
@@ -75,7 +75,7 @@ int	write_cs_data(t_critical_section *cs, void *data, int size)
 {
     if (pthread_mutex_lock(cs->mutex))
         return (FAILURE);
-    ft_memcpy(cs->data, data, sizeof(size));
+    ft_memcpy(cs->data, data, size);
     if (pthread_mutex_unlock(cs->mutex))
         return (FAILURE);
     return (SUCCESS);

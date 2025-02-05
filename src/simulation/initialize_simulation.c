@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   initialize_simulation.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsamir <hsamir@student.42kocaeli.com.tr    +#+  +:+       +#+        */
+/*   By: hsamir <hsamir@student.42kocaeli.com.tr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 20:24:18 by hsamir            #+#    #+#             */
-/*   Updated: 2025/02/03 15:38:10 by hsamir           ###   ########.fr       */
+/*   Updated: 2025/02/05 12:34:49 by hsamir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,9 @@
 int	start_simulation(t_simulation *simulation)
 {
 	int i;
-	int status;
 
 	simulation->start_time = current_time_ms();
-	status = RUNNING;
-	write_cs_data(&simulation->status, &status, sizeof(int));
+	set_sim_state(simulation, RUNNING);
 	i = 0;
 	while (i < simulation->philo_count)
 	{
@@ -63,14 +61,17 @@ t_simulation    *initialize_simulation(t_sim_config config)
 	simulation->eat_time_ms = config.eat_time_ms;
 	simulation->sleep_time_ms = config.sleep_time_ms;
 	simulation->max_meals = config.max_meals;
+	simulation->write_lock = create_mutex();
+	if (!simulation->write_lock)
+		return (abort_simulation(simulation), NULL);
 	if (!init_cs(&simulation->status, sizeof(int)))
 		return (free(simulation), NULL);
 	*(int *)(simulation->status.data) = IDLE;
 	simulation->fork_mutexes = initialize_forks(simulation->philo_count);
 	if (!simulation->fork_mutexes)
-		return (free(simulation), NULL);
+		return (abort_simulation(simulation), NULL);
 	simulation->philos = initialize_philos(simulation);
 	if (!simulation->philos)
-		return (abort_forks(simulation->fork_mutexes, simulation->philo_count), free(simulation), NULL);
+		return (abort_simulation(simulation), NULL);
    return (simulation);
 }

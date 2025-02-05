@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   convertion_utils.c                                 :+:      :+:    :+:   */
+/*   convertion_util.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hsamir <hsamir@student.42kocaeli.com.tr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 16:07:05 by hsamir            #+#    #+#             */
-/*   Updated: 2025/01/28 16:28:36 by hsamir           ###   ########.fr       */
+/*   Updated: 2025/02/05 00:11:35 by hsamir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/philo.h"
+#include "../../../includes/philo.h"
 
 int	skip_whitespace(const char *c)
 {

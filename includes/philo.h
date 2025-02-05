@@ -43,6 +43,8 @@ typedef struct s_simulation
 	t_philosopher		**philos;
 	pthread_mutex_t		*fork_mutexes;
 	t_critical_section	status;
+	pthread_t			*monitor_thread;
+	pthread_mutex_t		*write_lock;
 	long				start_time;
 	int					philo_count;
 	int					die_time_ms;
@@ -61,6 +63,9 @@ int					init_cs(t_critical_section *cs , int size);
 int					read_cs_data(t_critical_section *cs, void *data, int size);
 int					write_cs_data(t_critical_section *cs, void *data, int size);
 
+int					get_sim_state(t_simulation *sim);
+void				set_sim_state(t_simulation *sim, int state);
+
 void				abort_philos(t_philosopher   **philos, int philo_count);
 void				abort_forks(pthread_mutex_t *fork_mutexes, int fork_count);
 void				abort_cs(t_critical_section *cs);
@@ -71,5 +76,13 @@ t_philosopher		**initialize_philos(t_simulation *simulation);
 int					start_simulation(t_simulation *simulation);
 void				*philo_routine(void* arg);
 
+void increase_eat_count(t_philosopher *philo);
+void set_last_meal_time(t_philosopher *philo, long time);
+
+pthread_mutex_t	*create_mutex();
+
+void	sync_printf(char *message, t_philosopher *p);
+
 long	long current_time_ms();
+long	long  get_time_diff(long long start_time);
 void	msleep(unsigned long long time);

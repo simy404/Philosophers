@@ -1,25 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_utils.c                                      :+:      :+:    :+:   */
+/*   simulation_monitor.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hsamir <hsamir@student.42kocaeli.com.tr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/28 12:39:49 by hsamir            #+#    #+#             */
-/*   Updated: 2025/01/28 12:42:18 by hsamir           ###   ########.fr       */
+/*   Created: 2025/02/05 00:51:40 by hsamir            #+#    #+#             */
+/*   Updated: 2025/02/05 13:17:16 by hsamir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
+#include "../../../includes/philo.h"
 
-void	*print_error_null(char *error)
+void *monitor_thread(void* arg)
 {
-	ft_putendl_fd(error, 1);
-	return (NULL);
-}
+    t_simulation    *sim;
 
-void	*free_with_error_null(char *error, void *ptr)
-{
-	free(ptr);
-	return (print_error_null(error));
+    sim = (t_simulation *)arg;
 }

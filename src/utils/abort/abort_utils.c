@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   abort_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsamir <hsamir@student.42kocaeli.com.tr    +#+  +:+       +#+        */
+/*   By: hsamir <hsamir@student.42kocaeli.com.tr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 17:02:46 by hsamir            #+#    #+#             */
-/*   Updated: 2025/02/03 08:22:56 by hsamir           ###   ########.fr       */
+/*   Updated: 2025/02/05 12:33:47 by hsamir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/philo.h"
+#include "../../../includes/philo.h"
 #include <stdlib.h>
 
 void	abort_cs(t_critical_section *cs)
@@ -60,6 +60,11 @@ void abort_simulation(t_simulation *simulation)
 {
 	if (!simulation)
 		return ;
+	if (simulation->write_lock)
+	{
+		pthread_mutex_destroy(simulation->write_lock);
+		free(simulation->write_lock);
+	}
 	if (simulation->philos)
 		abort_philos(simulation->philos, simulation->philo_count);
 	if (simulation->fork_mutexes)
