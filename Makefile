@@ -6,7 +6,7 @@
 #    By: hsamir <hsamir@student.42kocaeli.com.tr>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/28 16:30:09 by hsamir            #+#    #+#              #
-#    Updated: 2025/02/05 13:05:21 by hsamir           ###   ########.fr        #
+#    Updated: 2025/02/05 13:39:13 by hsamir           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,6 +24,7 @@ src/simulation/initialize_simulation.c \
 src/utils/time/time_utils.c \
 src/utils/logger/print_utils.c \
 src/utils/sync/philo_metrics_utils.c \
+src/simulation/monitors/simulation_monitor.c \
 
 CC = clang
 CFLAGS = -Wall -Wextra -Werror -g -fsanitize=thread

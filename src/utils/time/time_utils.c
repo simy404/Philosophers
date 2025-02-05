@@ -6,7 +6,7 @@
 /*   By: hsamir <hsamir@student.42kocaeli.com.tr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 17:21:16 by hsamir            #+#    #+#             */
-/*   Updated: 2025/02/04 23:37:11 by hsamir           ###   ########.fr       */
+/*   Updated: 2025/02/05 15:38:24 by hsamir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ long long current_time_ms() {
 	struct timeval tv;
 
 	gettimeofday(&tv, NULL);
-	return tv.tv_sec * 1000LL + tv.tv_usec / 1000; // Milisaniye cinsine çevir
+	return tv.tv_sec * 1000LL + tv.tv_usec / 1000;
 }
 
 

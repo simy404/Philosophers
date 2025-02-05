@@ -6,7 +6,7 @@
 /*   By: hsamir <hsamir@student.42kocaeli.com.tr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 20:24:18 by hsamir            #+#    #+#             */
-/*   Updated: 2025/02/05 12:34:49 by hsamir           ###   ########.fr       */
+/*   Updated: 2025/02/05 13:49:38 by hsamir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ int	start_simulation(t_simulation *simulation)
 
 	simulation->start_time = current_time_ms();
 	set_sim_state(simulation, RUNNING);
+	if (pthread_create(&simulation->monitor_thread, NULL, monitor_thread, simulation))
+		return (FAILURE);
 	i = 0;
 	while (i < simulation->philo_count)
 	{
@@ -27,6 +29,8 @@ int	start_simulation(t_simulation *simulation)
 			return (FAILURE);
 		i++;
 	}
+	if (pthread_join(simulation->monitor_thread, NULL))
+		return (FAILURE);
 	return (SUCCESS);
 }
 

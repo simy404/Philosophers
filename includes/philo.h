@@ -43,7 +43,7 @@ typedef struct s_simulation
 	t_philosopher		**philos;
 	pthread_mutex_t		*fork_mutexes;
 	t_critical_section	status;
-	pthread_t			*monitor_thread;
+	pthread_t			monitor_thread;
 	pthread_mutex_t		*write_lock;
 	long				start_time;
 	int					philo_count;
@@ -75,9 +75,11 @@ t_simulation		*initialize_simulation(t_sim_config config);
 t_philosopher		**initialize_philos(t_simulation *simulation);
 int					start_simulation(t_simulation *simulation);
 void				*philo_routine(void* arg);
+void				*monitor_thread(void* arg);
 
-void increase_eat_count(t_philosopher *philo);
-void set_last_meal_time(t_philosopher *philo, long time);
+void 				increase_eat_count(t_philosopher *philo);
+void 				set_last_meal_time(t_philosopher *philo, long time);
+long long 			get_last_meal_time(t_philosopher *philo);
 
 pthread_mutex_t	*create_mutex();
 

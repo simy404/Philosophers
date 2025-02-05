@@ -6,7 +6,7 @@
 /*   By: hsamir <hsamir@student.42kocaeli.com.tr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 13:07:58 by hsamir            #+#    #+#             */
-/*   Updated: 2025/02/05 13:12:34 by hsamir           ###   ########.fr       */
+/*   Updated: 2025/02/05 14:53:09 by hsamir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int philo_sleep(t_philosopher *philo)
 int philo_think(t_philosopher *philo)
 {
 	sync_printf("%lld %d is thinking\n", philo);
-	msleep((philo->sim->die_time_ms - (philo->sim->sleep_time_ms + philo->sim->eat_time_ms ) / 2));
+	// msleep((philo->sim->die_time_ms - (philo->sim->sleep_time_ms + philo->sim->eat_time_ms ) / 2));
 	return 0;
 }
 
