@@ -6,7 +6,7 @@
 /*   By: hsamir <hsamir@student.42kocaeli.com.tr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 13:07:58 by hsamir            #+#    #+#             */
-/*   Updated: 2025/02/05 14:53:09 by hsamir           ###   ########.fr       */
+/*   Updated: 2025/02/05 16:01:24 by hsamir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ int philo_eat(t_philosopher* p)
 	pthread_mutex_t	*first;
 	pthread_mutex_t	*second;
 
-	first = &p->sim->fork_mutexes[(p->id - !(p->id % 2)) % p->sim->philo_count];
-	second = &p->sim->fork_mutexes[(p->id - (p->id % 2)) % p->sim->philo_count];
+	first = &p->sim->fork_mutexes[(p->id - (p->id % 2)) % p->sim->philo_count];
+	second = &p->sim->fork_mutexes[(p->id - !(p->id % 2)) % p->sim->philo_count];
 	if (first == second)
 		return (FAILURE); //TODO philo count is 1;
 	pthread_mutex_lock(first);

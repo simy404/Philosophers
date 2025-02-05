@@ -6,7 +6,7 @@
 /*   By: hsamir <hsamir@student.42kocaeli.com.tr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 20:24:18 by hsamir            #+#    #+#             */
-/*   Updated: 2025/02/05 13:49:38 by hsamir           ###   ########.fr       */
+/*   Updated: 2025/02/05 15:50:59 by hsamir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ t_simulation    *initialize_simulation(t_sim_config config)
 	simulation->fork_mutexes = initialize_forks(simulation->philo_count);
 	if (!simulation->fork_mutexes)
 		return (abort_simulation(simulation), NULL);
-	simulation->philos = initialize_philos(simulation);
+	simulation->philos = initialize_philos(simulation); // -2  -> 0 - -2 > 200
 	if (!simulation->philos)
 		return (abort_simulation(simulation), NULL);
    return (simulation);
