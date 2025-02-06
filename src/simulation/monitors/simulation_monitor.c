@@ -6,11 +6,12 @@
 /*   By: hsamir <hsamir@student.42kocaeli.com.tr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 00:51:40 by hsamir            #+#    #+#             */
-/*   Updated: 2025/02/05 14:54:49 by hsamir           ###   ########.fr       */
+/*   Updated: 2025/02/06 07:13:43 by hsamir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/philo.h"
+#include <unistd.h>
 
 int	philo_die_check(t_philosopher *philo)
 {
@@ -41,7 +42,7 @@ void    *monitor_thread(void* arg)
 			i++;
 		}
 		i = 0;
-		msleep(10);
+		usleep(100);
 	}
 	return (NULL);
 }

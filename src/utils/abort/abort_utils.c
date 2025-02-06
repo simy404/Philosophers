@@ -6,7 +6,7 @@
 /*   By: hsamir <hsamir@student.42kocaeli.com.tr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 17:02:46 by hsamir            #+#    #+#             */
-/*   Updated: 2025/02/05 12:33:47 by hsamir           ###   ########.fr       */
+/*   Updated: 2025/02/06 09:07:46 by hsamir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,10 +56,10 @@ void	abort_forks(pthread_mutex_t *fork_mutexes, int fork_count)
 	free(fork_mutexes);
 }
 
-void abort_simulation(t_simulation *simulation)
+void *abort_simulation(t_simulation *simulation)
 {
 	if (!simulation)
-		return ;
+		return (NULL);
 	if (simulation->write_lock)
 	{
 		pthread_mutex_destroy(simulation->write_lock);
@@ -71,4 +71,5 @@ void abort_simulation(t_simulation *simulation)
 		abort_forks(simulation->fork_mutexes, simulation->philo_count);
 	abort_cs(&simulation->status);
 	free(simulation);
+	return (NULL);
 }

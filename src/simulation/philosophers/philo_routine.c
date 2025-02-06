@@ -6,7 +6,7 @@
 /*   By: hsamir <hsamir@student.42kocaeli.com.tr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 13:07:58 by hsamir            #+#    #+#             */
-/*   Updated: 2025/02/05 16:01:24 by hsamir           ###   ########.fr       */
+/*   Updated: 2025/02/06 08:49:40 by hsamir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,14 @@ int philo_eat(t_philosopher* p)
 
 	first = &p->sim->fork_mutexes[(p->id - (p->id % 2)) % p->sim->philo_count];
 	second = &p->sim->fork_mutexes[(p->id - !(p->id % 2)) % p->sim->philo_count];
-	if (first == second)
-		return (FAILURE); //TODO philo count is 1;
 	pthread_mutex_lock(first);
-	sync_printf("%lld %d has taken a fork\n", p); //TODO check that is simulation still running ?	
+	sync_printf("%lld %d has taken a fork\n", p);
+	if (first == second)
+	{
+		msleep(p->sim->die_time_ms - (current_time_ms() - p->sim->start_time));
+		pthread_mutex_unlock(first);
+		return (FAILURE);
+	};
 	pthread_mutex_lock(second);
 	if (get_sim_state(p->sim) == RUNNING)
 	{
@@ -35,8 +39,8 @@ int philo_eat(t_philosopher* p)
 		set_last_meal_time(p, current_time_ms());
 		msleep(p->sim->eat_time_ms);
 	}
-	pthread_mutex_unlock(second);
 	pthread_mutex_unlock(first);
+	pthread_mutex_unlock(second);
 	return (SUCCESS);
 }
 
@@ -49,8 +53,14 @@ int philo_sleep(t_philosopher *philo)
 
 int philo_think(t_philosopher *philo)
 {
+	int sleep_time;
 	sync_printf("%lld %d is thinking\n", philo);
-	// msleep((philo->sim->die_time_ms - (philo->sim->sleep_time_ms + philo->sim->eat_time_ms ) / 2));
+	
+	sleep_time = (philo->sim->die_time_ms - (philo->sim->sleep_time_ms + philo->sim->eat_time_ms)) / 2;
+	if (sleep_time > 0)
+		msleep(sleep_time);
+	else
+		usleep(100);
 	return 0;
 }
 
@@ -62,7 +72,7 @@ void    *philo_routine(void* arg)
 	while (get_sim_state(philo->sim) == IDLE)
 		;
 	if (philo->id % 2)
-		usleep(1000);
+		msleep(1);
 	while (get_sim_state(philo->sim) == RUNNING)
 	{
 		if (!philo_eat(philo))

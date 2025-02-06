@@ -6,7 +6,7 @@
 /*   By: hsamir <hsamir@student.42kocaeli.com.tr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 17:21:16 by hsamir            #+#    #+#             */
-/*   Updated: 2025/02/05 15:38:24 by hsamir           ###   ########.fr       */
+/*   Updated: 2025/02/06 07:03:57 by hsamir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,9 @@ void	msleep(unsigned long long time)
 	unsigned long long start_time;
 
 	start_time = current_time_us();
-	usleep((time * 1000 - 10000));
+	// usleep((time * 1000 - 5000));
 	while (current_time_us() - start_time < time * 1000)
-		;
+		usleep(100);
 }
 
 long long get_time_diff(long long start_time)

@@ -6,7 +6,7 @@
 /*   By: hsamir <hsamir@student.42kocaeli.com.tr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 00:44:46 by hsamir            #+#    #+#             */
-/*   Updated: 2025/02/05 13:41:15 by hsamir           ###   ########.fr       */
+/*   Updated: 2025/02/06 09:10:32 by hsamir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void increase_eat_count(t_philosopher *philo)
 
 void set_last_meal_time(t_philosopher *philo, long time)
 {
-    write_cs_data(&philo->last_meal_time, &time, sizeof(long));
+    write_cs_data(&philo->last_meal_time, &time, sizeof(long long));
 }
 
 long long get_last_meal_time(t_philosopher *philo)

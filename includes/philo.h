@@ -69,7 +69,7 @@ void				set_sim_state(t_simulation *sim, int state);
 void				abort_philos(t_philosopher   **philos, int philo_count);
 void				abort_forks(pthread_mutex_t *fork_mutexes, int fork_count);
 void				abort_cs(t_critical_section *cs);
-void				abort_simulation(t_simulation *simulation);
+void				*abort_simulation(t_simulation *simulation);
 
 t_simulation		*initialize_simulation(t_sim_config config);
 t_philosopher		**initialize_philos(t_simulation *simulation);

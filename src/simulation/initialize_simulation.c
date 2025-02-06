@@ -6,7 +6,7 @@
 /*   By: hsamir <hsamir@student.42kocaeli.com.tr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 20:24:18 by hsamir            #+#    #+#             */
-/*   Updated: 2025/02/05 15:50:59 by hsamir           ###   ########.fr       */
+/*   Updated: 2025/02/06 09:18:10 by hsamir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,15 +67,15 @@ t_simulation    *initialize_simulation(t_sim_config config)
 	simulation->max_meals = config.max_meals;
 	simulation->write_lock = create_mutex();
 	if (!simulation->write_lock)
-		return (abort_simulation(simulation), NULL);
+		return (abort_simulation(simulation));
 	if (!init_cs(&simulation->status, sizeof(int)))
-		return (free(simulation), NULL);
-	*(int *)(simulation->status.data) = IDLE;
+		return (abort_simulation(simulation));
+	set_sim_state(simulation, IDLE);
 	simulation->fork_mutexes = initialize_forks(simulation->philo_count);
 	if (!simulation->fork_mutexes)
-		return (abort_simulation(simulation), NULL);
-	simulation->philos = initialize_philos(simulation); // -2  -> 0 - -2 > 200
+		return (abort_simulation(simulation));
+	simulation->philos = initialize_philos(simulation);
 	if (!simulation->philos)
-		return (abort_simulation(simulation), NULL);
-   return (simulation);
+		return (abort_simulation(simulation));
+	return (simulation);
 }
