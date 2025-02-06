@@ -6,7 +6,7 @@
 /*   By: hsamir <hsamir@student.42kocaeli.com.tr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 20:24:18 by hsamir            #+#    #+#             */
-/*   Updated: 2025/02/06 09:18:10 by hsamir           ###   ########.fr       */
+/*   Updated: 2025/02/06 09:50:55 by hsamir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ pthread_mutex_t* initialize_forks(int fork_count)
 	int i;
 
 	fork_mutexes = malloc(sizeof(pthread_mutex_t) * fork_count);
+	if (!fork_mutexes)
+		return (NULL);
 	i = 0;
 	while (i < fork_count)
 	{
@@ -65,6 +67,7 @@ t_simulation    *initialize_simulation(t_sim_config config)
 	simulation->eat_time_ms = config.eat_time_ms;
 	simulation->sleep_time_ms = config.sleep_time_ms;
 	simulation->max_meals = config.max_meals;
+	simulation->think_time_ms = (config.die_time_ms - (config.sleep_time_ms + config.eat_time_ms)) / 2;
 	simulation->write_lock = create_mutex();
 	if (!simulation->write_lock)
 		return (abort_simulation(simulation));

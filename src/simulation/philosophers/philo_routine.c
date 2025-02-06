@@ -6,7 +6,7 @@
 /*   By: hsamir <hsamir@student.42kocaeli.com.tr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 13:07:58 by hsamir            #+#    #+#             */
-/*   Updated: 2025/02/06 08:49:40 by hsamir           ###   ########.fr       */
+/*   Updated: 2025/02/06 09:52:20 by hsamir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,11 +56,11 @@ int philo_think(t_philosopher *philo)
 	int sleep_time;
 	sync_printf("%lld %d is thinking\n", philo);
 	
-	sleep_time = (philo->sim->die_time_ms - (philo->sim->sleep_time_ms + philo->sim->eat_time_ms)) / 2;
+	sleep_time = philo->sim->think_time_ms;
 	if (sleep_time > 0)
 		msleep(sleep_time);
 	else
-		usleep(100);
+		usleep(100); // I have to check that might be that's not necessary
 	return 0;
 }
 

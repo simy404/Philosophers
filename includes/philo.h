@@ -50,6 +50,7 @@ typedef struct s_simulation
 	int					die_time_ms;
 	int					eat_time_ms;
 	int					sleep_time_ms;
+	int					think_time_ms;
 	int					max_meals;
 }						t_simulation;
 
