@@ -6,19 +6,21 @@
 /*   By: hsamir <hsamir@student.42kocaeli.com.tr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 20:24:18 by hsamir            #+#    #+#             */
-/*   Updated: 2025/02/06 09:50:55 by hsamir           ###   ########.fr       */
+/*   Updated: 2025/02/06 17:48:52 by hsamir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/philo.h"
 #include <stdlib.h>
 #include <time.h>
+#include <stdio.h>
 
 int	start_simulation(t_simulation *simulation)
 {
 	int i;
 
 	simulation->start_time = current_time_ms();
+	printf ("sim start time: %ld\n", simulation->start_time);
 	set_sim_state(simulation, RUNNING);
 	if (pthread_create(&simulation->monitor_thread, NULL, monitor_thread, simulation))
 		return (FAILURE);
