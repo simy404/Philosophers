@@ -6,7 +6,7 @@
 /*   By: hsamir <hsamir@student.42kocaeli.com.tr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 13:07:58 by hsamir            #+#    #+#             */
-/*   Updated: 2025/02/06 18:00:24 by hsamir           ###   ########.fr       */
+/*   Updated: 2025/02/07 19:25:27 by hsamir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,9 @@ int philo_eat(t_philosopher* p)
 	{
 		sync_printf("%lld %d has taken a fork\n", p);
 		sync_printf("%lld %d is eating\n", p);
-		msleep(p->sim->eat_time_ms);
-		increase_eat_count(p);
 		set_last_meal_time(p, current_time_ms());
+		increase_eat_count(p);
+		msleep(p->sim->eat_time_ms);
 	}
 	pthread_mutex_unlock(first);
 	pthread_mutex_unlock(second);
@@ -55,12 +55,11 @@ int philo_think(t_philosopher *philo)
 {
 	int sleep_time;
 	sync_printf("%lld %d is thinking\n", philo);
-	
 	sleep_time = philo->sim->think_time_ms;
 	if (sleep_time > 0)
 		msleep(sleep_time);
 	else
-		usleep(100); // I have to check that might be that's not necessary
+		usleep(1000);
 	return 0;
 }
 #include <stdio.h>
@@ -71,11 +70,9 @@ void    *philo_routine(void* arg)
 	philo = (t_philosopher*)arg;
 	while (get_sim_state(philo->sim) == IDLE)
 		;
-    set_last_meal_time(philo, current_time_ms());
-	// printf ("start time: %lld\n", *(long long*)philo->last_meal_time.data);
-	// return (NULL);
+	set_last_meal_time(philo, current_time_ms());
 	if (philo->id % 2)
-		msleep(philo->sim->eat_time_ms / 2);
+		usleep((philo->sim->eat_time_ms / 2) * 1000);
 	while (get_sim_state(philo->sim) == RUNNING)
 	{
 		if (!philo_eat(philo))

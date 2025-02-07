@@ -6,7 +6,7 @@
 /*   By: hsamir <hsamir@student.42kocaeli.com.tr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 17:45:32 by hsamir            #+#    #+#             */
-/*   Updated: 2025/02/06 17:41:44 by hsamir           ###   ########.fr       */
+/*   Updated: 2025/02/07 11:54:23 by hsamir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ t_philosopher   *initialize_philo(int id, t_simulation *simulation)
         return (free(philo), NULL);
     if (!init_cs(&philo->last_meal_time, sizeof(long long)))
         return (abort_cs(&philo->eat_count), free(philo), NULL);
+    set_last_meal_time(philo, __LONG_MAX__);
     return (philo);
 }
 
