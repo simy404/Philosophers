@@ -6,7 +6,7 @@
 #    By: hsamir <hsamir@student.42kocaeli.com.tr>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/28 16:30:09 by hsamir            #+#    #+#              #
-#    Updated: 2025/02/06 08:48:38 by hsamir           ###   ########.fr        #
+#    Updated: 2025/02/09 17:53:14 by hsamir           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,8 +26,8 @@ src/utils/logger/print_utils.c \
 src/utils/sync/philo_metrics_utils.c \
 src/simulation/monitors/simulation_monitor.c \
 
-CC = clang
-CFLAGS = -Wall -Wextra -Werror -g #-fsanitize=thread
+CC = cc
+CFLAGS = -Wall -Wextra -Werror -O3 -pthread
 OBJ = $(SRC:.c=.o)
 
 all: $(NAME)

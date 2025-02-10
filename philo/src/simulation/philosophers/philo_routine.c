@@ -6,30 +6,48 @@
 /*   By: hsamir <hsamir@student.42kocaeli.com.tr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 13:07:58 by hsamir            #+#    #+#             */
-/*   Updated: 2025/02/07 19:25:27 by hsamir           ###   ########.fr       */
+/*   Updated: 2025/02/10 11:54:33 by hsamir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/philo.h"
-#include <sys/time.h>
 #include <stdio.h>
+#include <sys/time.h>
 #include <unistd.h>
 
-int philo_eat(t_philosopher* p)
+int	philo_eat(t_philosopher *p)
 {
 	pthread_mutex_t	*first;
 	pthread_mutex_t	*second;
 
-	first = &p->sim->fork_mutexes[(p->id - (p->id % 2)) % p->sim->philo_count];
-	second = &p->sim->fork_mutexes[(p->id - !(p->id % 2)) % p->sim->philo_count];
+	// first = &p->sim->fork_mutexes[(p->id - (p->id % 2)) % p->sim->philo_count];
+	// second = &p->sim->fork_mutexes[(p->id - !(p->id % 2)) % p->sim->philo_count];
+	if (p->id % 2 == 0)
+	{
+		first = &p->sim->fork_mutexes[p->id % p->sim->philo_count];
+		second = &p->sim->fork_mutexes[(p->id - 1) % p->sim->philo_count];
+	}
+	else
+	{
+		first = &p->sim->fork_mutexes[(p->id - 1) % p->sim->philo_count];
+		second = &p->sim->fork_mutexes[p->id % p->sim->philo_count];
+	}
+	// first = &p->sim->fork_mutexes[(p->id - !(p->id == (unsigned int)p->sim->philo_count))
+	// 	% p->sim->philo_count]; // 1 - 1
+	// second = &p->sim->fork_mutexes[(p->id - (p->id == (unsigned int)p->sim->philo_count))
+	// 	% p->sim->philo_count];
+
+		
+	// first = &p->sim->fork_mutexes[(p->id - 1) % p->sim->philo_count];
+	// second = &p->sim->fork_mutexes[(p->id) % p->sim->philo_count];
 	pthread_mutex_lock(first);
 	sync_printf("%lld %d has taken a fork\n", p);
-	if (first == second)
+	if (first == second) // im gonna check that
 	{
 		msleep(p->sim->die_time_ms - (current_time_ms() - p->sim->start_time));
 		pthread_mutex_unlock(first);
 		return (FAILURE);
-	};
+	}
 	pthread_mutex_lock(second);
 	if (get_sim_state(p->sim) == RUNNING)
 	{
@@ -44,14 +62,14 @@ int philo_eat(t_philosopher* p)
 	return (SUCCESS);
 }
 
-int philo_sleep(t_philosopher *philo)
+int	philo_sleep(t_philosopher *philo)
 {
 	sync_printf("%lld %d is sleeping\n", philo);
 	msleep(philo->sim->sleep_time_ms);
-	return 0;
+	return (0);
 }
 
-int philo_think(t_philosopher *philo)
+int	philo_think(t_philosopher *philo)
 {
 	int sleep_time;
 	sync_printf("%lld %d is thinking\n", philo);
@@ -60,28 +78,29 @@ int philo_think(t_philosopher *philo)
 		msleep(sleep_time);
 	else
 		usleep(1000);
-	return 0;
+	return (0);
 }
 #include <stdio.h>
-void    *philo_routine(void* arg)
+
+void	*philo_routine(void *arg)
 {
 	t_philosopher	*philo;
 
-	philo = (t_philosopher*)arg;
+	philo = (t_philosopher *)arg;
 	while (get_sim_state(philo->sim) == IDLE)
 		;
 	set_last_meal_time(philo, current_time_ms());
 	if (philo->id % 2)
-		usleep((philo->sim->eat_time_ms / 2) * 1000);
+		msleep(1);
 	while (get_sim_state(philo->sim) == RUNNING)
 	{
 		if (!philo_eat(philo))
-			break;
+			break ;
 		if (get_sim_state(philo->sim) == TERMINATED)
-			break;
+			break ;
 		philo_sleep(philo);
 		if (get_sim_state(philo->sim) == TERMINATED)
-			break;
+			break ;
 		philo_think(philo);
 	}
 	return (NULL);

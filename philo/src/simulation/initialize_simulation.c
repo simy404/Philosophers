@@ -6,7 +6,7 @@
 /*   By: hsamir <hsamir@student.42kocaeli.com.tr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 20:24:18 by hsamir            #+#    #+#             */
-/*   Updated: 2025/02/07 17:40:49 by hsamir           ###   ########.fr       */
+/*   Updated: 2025/02/10 10:25:59 by hsamir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,12 @@
 #include <stdlib.h>
 #include <time.h>
 #include <stdio.h>
+#include <unistd.h>
 
 int	start_simulation(t_simulation *simulation)
 {
 	int i;
 
-	simulation->start_time = current_time_ms();
-	set_sim_state(simulation, RUNNING);
 	if (pthread_create(&simulation->monitor_thread, NULL, monitor_thread, simulation))
 		return (FAILURE);
 	i = 0;

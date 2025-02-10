@@ -45,7 +45,7 @@ typedef struct s_simulation
 	t_critical_section	status;
 	pthread_t			monitor_thread;
 	pthread_mutex_t		*write_lock;
-	long				start_time;
+	unsigned long		start_time;
 	int					philo_count;
 	int					die_time_ms;
 	int					eat_time_ms;
@@ -79,13 +79,14 @@ void				*philo_routine(void* arg);
 void				*monitor_thread(void* arg);
 
 void 				increase_eat_count(t_philosopher *philo);
-void 				set_last_meal_time(t_philosopher *philo, long time);
-long long 			get_last_meal_time(t_philosopher *philo);
+int					get_eat_count(t_philosopher *philo);
+void 				set_last_meal_time(t_philosopher *philo, unsigned long time);
+unsigned long		get_last_meal_time(t_philosopher *philo);
 
-pthread_mutex_t	*create_mutex();
+pthread_mutex_t		*create_mutex();
 
-void	sync_printf(char *message, t_philosopher *p);
+void				sync_printf(char *message, t_philosopher *p);
 
-long	long current_time_ms();
-long	long  get_time_diff(long long start_time);
-void	msleep(unsigned long long time);
+unsigned long				current_time_ms();
+unsigned long				current_time_us();
+void				msleep(unsigned long time);

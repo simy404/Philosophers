@@ -6,12 +6,13 @@
 /*   By: hsamir <hsamir@student.42kocaeli.com.tr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 17:45:32 by hsamir            #+#    #+#             */
-/*   Updated: 2025/02/07 11:54:23 by hsamir           ###   ########.fr       */
+/*   Updated: 2025/02/10 10:50:18 by hsamir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/philo.h"
 #include <stdlib.h>
+#include <limits.h>
 
 t_philosopher   *initialize_philo(int id, t_simulation *simulation)
 {
@@ -26,9 +27,9 @@ t_philosopher   *initialize_philo(int id, t_simulation *simulation)
             return (free(philo), NULL);
     if (!init_cs(&philo->eat_count, sizeof(int)))
         return (free(philo), NULL);
-    if (!init_cs(&philo->last_meal_time, sizeof(long long)))
+    if (!init_cs(&philo->last_meal_time, sizeof(unsigned long)))
         return (abort_cs(&philo->eat_count), free(philo), NULL);
-    set_last_meal_time(philo, __LONG_MAX__);
+    set_last_meal_time(philo, current_time_ms());
     return (philo);
 }
 

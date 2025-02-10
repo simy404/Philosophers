@@ -6,7 +6,7 @@
 /*   By: hsamir <hsamir@student.42kocaeli.com.tr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 12:39:49 by hsamir            #+#    #+#             */
-/*   Updated: 2025/02/06 15:40:18 by hsamir           ###   ########.fr       */
+/*   Updated: 2025/02/10 10:50:07 by hsamir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,6 @@ void	sync_printf(char *message, t_philosopher *p)
 		return ;
 	pthread_mutex_lock(p->sim->write_lock);
 	if (get_sim_state(p->sim) == RUNNING)
-		printf(message, current_time_ms() - p->sim->start_time, p->id);
+		printf(message, (current_time_ms() - p->sim->start_time), p->id);
 	pthread_mutex_unlock(p->sim->write_lock);
 }
