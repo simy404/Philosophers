@@ -6,7 +6,7 @@
 /*   By: hsamir <hsamir@student.42kocaeli.com.tr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 13:07:58 by hsamir            #+#    #+#             */
-/*   Updated: 2025/02/10 13:30:04 by hsamir           ###   ########.fr       */
+/*   Updated: 2025/02/10 15:36:11 by hsamir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ void	*philo_routine(void *arg)
 	philo = (t_philosopher *)arg;
 	while (get_sim_state(philo->sim) == IDLE)
 		;
-	set_last_meal_time(philo, current_time_us());
+	set_last_meal_time(philo, current_time_ms());
 	if (philo->id % 2)
 		msleep(1);
 	while (get_sim_state(philo->sim) == RUNNING)

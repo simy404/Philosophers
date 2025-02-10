@@ -6,7 +6,7 @@
 /*   By: hsamir <hsamir@student.42kocaeli.com.tr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 17:21:16 by hsamir            #+#    #+#             */
-/*   Updated: 2025/02/10 10:07:06 by hsamir           ###   ########.fr       */
+/*   Updated: 2025/02/10 15:53:35 by hsamir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ unsigned long	current_time_ms(void)
 	struct timeval	tv;
 
 	gettimeofday(&tv, NULL);
-	return (tv.tv_sec * 1000LL + tv.tv_usec / 1000);
+	return (tv.tv_sec * 1000LL + (tv.tv_usec) / 1000);
 }
 
 long	current_time_us(void)

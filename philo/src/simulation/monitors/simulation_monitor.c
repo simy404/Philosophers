@@ -6,7 +6,7 @@
 /*   By: hsamir <hsamir@student.42kocaeli.com.tr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 00:51:40 by hsamir            #+#    #+#             */
-/*   Updated: 2025/02/10 12:14:07 by hsamir           ###   ########.fr       */
+/*   Updated: 2025/02/10 14:49:35 by hsamir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ void	*monitor_thread(void *arg)
 	int i;
 
 	sim = (t_simulation *)arg;
-	sim->start_time = current_time_ms();
 	set_sim_state(sim, RUNNING);
+	sim->start_time = current_time_ms();
 	i = 0;
 	full_philo_count = 0;
 	while (get_sim_state(sim) == RUNNING)
