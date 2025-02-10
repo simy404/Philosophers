@@ -6,7 +6,7 @@
 /*   By: hsamir <hsamir@student.42kocaeli.com.tr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 13:07:58 by hsamir            #+#    #+#             */
-/*   Updated: 2025/02/10 12:56:40 by hsamir           ###   ########.fr       */
+/*   Updated: 2025/02/10 13:30:04 by hsamir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,11 +76,8 @@ int	philo_think(t_philosopher *philo)
 	sleep_time = philo->sim->think_time_ms;
 	if (sleep_time > 0)
 		msleep(sleep_time);
-	else
-		usleep(1000);
 	return (0);
 }
-#include <stdio.h>
 
 void	*philo_routine(void *arg)
 {
