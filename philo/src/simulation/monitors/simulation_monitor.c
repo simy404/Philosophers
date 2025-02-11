@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   simulation_monitor.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsamir <hsamir@student.42kocaeli.com.tr>   +#+  +:+       +#+        */
+/*   By: hsamir <hsamir@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 00:51:40 by hsamir            #+#    #+#             */
-/*   Updated: 2025/02/10 14:49:35 by hsamir           ###   ########.fr       */
+/*   Updated: 2025/02/11 21:44:17 by hsamir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	has_philo_died(t_philosopher *philo)
 	return (current_time_ms() >= (philo->sim->die_time_ms
 			+ get_last_meal_time(philo)));
 }
- 
+
 void	*monitor_thread(void *arg)
 {
 	t_simulation *sim;

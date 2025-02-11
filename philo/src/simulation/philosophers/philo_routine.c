@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_routine.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsamir <hsamir@student.42kocaeli.com.tr>   +#+  +:+       +#+        */
+/*   By: hsamir <hsamir@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 13:07:58 by hsamir            #+#    #+#             */
-/*   Updated: 2025/02/10 15:36:11 by hsamir           ###   ########.fr       */
+/*   Updated: 2025/02/11 19:59:26 by hsamir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	philo_eat(t_philosopher *p)
 
 	// first = &p->sim->fork_mutexes[(p->id - (p->id % 2)) % p->sim->philo_count];
 	// second = &p->sim->fork_mutexes[(p->id - !(p->id % 2)) % p->sim->philo_count];
-	if (p->id % 2 == 0)
+	if (p->id % 2)
 	{
 		first = &p->sim->fork_mutexes[p->id % p->sim->philo_count];
 		second = &p->sim->fork_mutexes[(p->id - 1) % p->sim->philo_count];
@@ -37,7 +37,7 @@ int	philo_eat(t_philosopher *p)
 	// second = &p->sim->fork_mutexes[(p->id - (p->id == (unsigned int)p->sim->philo_count))
 	// 	% p->sim->philo_count];
 
-		
+
 	// first = &p->sim->fork_mutexes[(p->id - 1) % p->sim->philo_count];
 	// second = &p->sim->fork_mutexes[(p->id) % p->sim->philo_count];
 	pthread_mutex_lock(first);
