@@ -21,7 +21,7 @@ int	main(int argc, char **argv)
 	if (argc != 5 && argc != 6)
 		return (printf(ARGUMENT_ERROR));
 	config = parse_arguments(argc,argv);
-	if (config.err)
+	if (config.err || config.philo_count < 1 || config.die_time_ms < 60 || config.eat_time_ms < 60 || config.sleep_time_ms < 60)
 		return (printf(ARGUMENT_ERROR));
 	simulation = initialize_simulation(config);
 	if (!simulation)

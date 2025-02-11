@@ -38,7 +38,6 @@ void	*monitor_thread(void *arg)
 			if (has_philo_died(sim->philos[i]))
 			{
 				sync_printf("%lld %d died\n", sim->philos[i]);
-				printf ("last meal time: %ld\n", get_last_meal_time(sim->philos[i]));
 				set_sim_state(sim, TERMINATED);
 				break ;
 			}
