@@ -6,7 +6,7 @@
 #    By: hsamir <hsamir@student.42kocaeli.com.tr>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/28 16:30:09 by hsamir            #+#    #+#              #
-#    Updated: 2025/02/12 13:18:46 by hsamir           ###   ########.fr        #
+#    Updated: 2025/02/12 23:53:00 by hsamir           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,7 @@ src/utils/sync/philo_metrics_utils.c \
 src/simulation/monitors/simulation_monitor.c \
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -O3 -pthread
+CFLAGS = -Wall -Wextra -Werror -pthread
 OBJ = $(SRC:.c=.o)
 
 all: $(NAME)
