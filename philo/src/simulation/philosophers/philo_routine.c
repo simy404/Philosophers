@@ -6,13 +6,11 @@
 /*   By: hsamir <hsamir@student.42kocaeli.com.tr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 13:07:58 by hsamir            #+#    #+#             */
-/*   Updated: 2025/02/12 21:45:42 by hsamir           ###   ########.fr       */
+/*   Updated: 2025/02/12 23:05:18 by hsamir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/philo.h"
-#include <stdio.h>
-#include <sys/time.h>
 #include <unistd.h>
 
 int	philo_eat(t_philosopher *p)
@@ -20,23 +18,13 @@ int	philo_eat(t_philosopher *p)
 	pthread_mutex_t	*first;
 	pthread_mutex_t	*second;
 
-	// first = &p->sim->fork_mutexes[(p->id - (p->id % 2))
-		//% p->sim->philo_count];
-	// second = &p->sim->fork_mutexes[(p->id - !(p->id % 2))
-		// % p->sim->philo_count];
-	if (p->id % 2)
-	{
-		first = &p->sim->fork_mutexes[p->id % p->sim->philo_count];
-		second = &p->sim->fork_mutexes[(p->id - 1) % p->sim->philo_count];
-	}
-	else
-	{
-		first = &p->sim->fork_mutexes[(p->id - 1) % p->sim->philo_count];
-		second = &p->sim->fork_mutexes[p->id % p->sim->philo_count];
-	}
+	first = &p->sim->fork_mutexes[(p->id - (p->id % 2))
+		% p->sim->philo_count];
+	second = &p->sim->fork_mutexes[(p->id - !(p->id % 2))
+		% p->sim->philo_count];
 	pthread_mutex_lock(first);
 	sync_printf("%lld %d has taken a fork\n", p);
-	if (first == second) // im gonna check that
+	if (first == second)
 	{
 		msleep(p->sim->die_time_ms - (current_time_ms() - p->sim->start_time));
 		pthread_mutex_unlock(first);
@@ -53,14 +41,14 @@ int	philo_eat(t_philosopher *p)
 	}
 	pthread_mutex_unlock(first);
 	pthread_mutex_unlock(second);
-	return (SUCCESS);
+	return (SUCCESS && get_sim_state(p->sim) == RUNNING);
 }
 
 int	philo_sleep(t_philosopher *philo)
 {
 	sync_printf("%lld %d is sleeping\n", philo);
 	msleep(philo->sim->sleep_time_ms);
-	return (0);
+	return (get_sim_state(philo->sim) == RUNNING);
 }
 
 int	philo_think(t_philosopher *philo)
@@ -88,10 +76,7 @@ void	*philo_routine(void *arg)
 	{
 		if (!philo_eat(philo))
 			break ;
-		if (get_sim_state(philo->sim) == TERMINATED)
-			break ;
-		philo_sleep(philo);
-		if (get_sim_state(philo->sim) == TERMINATED)
+		if (!philo_sleep(philo))
 			break ;
 		philo_think(philo);
 	}
