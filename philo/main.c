@@ -6,7 +6,7 @@
 /*   By: hsamir <hsamir@student.42kocaeli.com.tr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 12:50:35 by hsamir            #+#    #+#             */
-/*   Updated: 2025/02/12 18:43:02 by hsamir           ###   ########.fr       */
+/*   Updated: 2025/02/12 22:06:48 by hsamir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ int	main(int argc, char **argv)
 	simulation = initialize_simulation(config);
 	if (!simulation)
 		return (printf("Error: Simulation initialization failed\n"));
-	printf("<philos:%d> <t_die:%d> <t_eat:%d> <t_sleep:%d> [eat_count:%d], err check:%d\n", simulation->philo_count,config.die_time_ms,config.eat_time_ms,config.sleep_time_ms,config.max_meals,config.err);
 	if (!start_simulation(simulation))
 		printf("Error: Simulation failed\n");
 	abort_simulation(simulation);

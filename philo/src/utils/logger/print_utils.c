@@ -6,11 +6,10 @@
 /*   By: hsamir <hsamir@student.42kocaeli.com.tr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 12:39:49 by hsamir            #+#    #+#             */
-/*   Updated: 2025/02/12 21:50:18 by hsamir           ###   ########.fr       */
+/*   Updated: 2025/02/12 22:07:27 by hsamir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
 #include <stdio.h>
 #include "../../../includes/philo.h"
 

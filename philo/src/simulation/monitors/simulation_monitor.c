@@ -6,13 +6,12 @@
 /*   By: hsamir <hsamir@student.42kocaeli.com.tr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 00:51:40 by hsamir            #+#    #+#             */
-/*   Updated: 2025/02/12 18:50:57 by hsamir           ###   ########.fr       */
+/*   Updated: 2025/02/12 22:11:37 by hsamir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/philo.h"
 #include <stdio.h>
-#include <unistd.h>
 
 int	is_philo_starved(t_philosopher *philo)
 {
