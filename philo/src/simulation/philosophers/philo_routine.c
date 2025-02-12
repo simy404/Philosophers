@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_routine.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hsamir <hsamir@student.42kocaeli.com.tr    +#+  +:+       +#+        */
+/*   By: hsamir <hsamir@student.42kocaeli.com.tr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 13:07:58 by hsamir            #+#    #+#             */
-/*   Updated: 2025/02/11 19:59:26 by hsamir           ###   ########.fr       */
+/*   Updated: 2025/02/12 13:14:00 by hsamir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ int	philo_sleep(t_philosopher *philo)
 int	philo_think(t_philosopher *philo)
 {
 	int sleep_time;
+	
 	sync_printf("%lld %d is thinking\n", philo);
 	sleep_time = philo->sim->think_time_ms;
 	if (sleep_time > 0)
