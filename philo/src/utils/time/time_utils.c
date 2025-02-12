@@ -6,7 +6,7 @@
 /*   By: hsamir <hsamir@student.42kocaeli.com.tr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 17:21:16 by hsamir            #+#    #+#             */
-/*   Updated: 2025/02/10 15:53:35 by hsamir           ###   ########.fr       */
+/*   Updated: 2025/02/12 21:38:26 by hsamir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ struct timeval	get_cur_time(void)
 
 void	msleep(unsigned long ms)
 {
-	unsigned long start;
+	unsigned long	start;
 
 	start = current_time_ms();
 	while (current_time_ms() - start < ms)

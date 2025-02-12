@@ -6,7 +6,7 @@
 /*   By: hsamir <hsamir@student.42kocaeli.com.tr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 17:02:46 by hsamir            #+#    #+#             */
-/*   Updated: 2025/02/06 09:07:46 by hsamir           ###   ########.fr       */
+/*   Updated: 2025/02/12 21:49:56 by hsamir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	abort_cs(t_critical_section *cs)
 	}
 }
 
-void	abort_philos(t_philosopher   **philos, int philo_count)
+void	abort_philos(t_philosopher **philos, int philo_count)
 {
 	int	i;
 
@@ -56,7 +56,7 @@ void	abort_forks(pthread_mutex_t *fork_mutexes, int fork_count)
 	free(fork_mutexes);
 }
 
-void *abort_simulation(t_simulation *simulation)
+void	*abort_simulation(t_simulation *simulation)
 {
 	if (!simulation)
 		return (NULL);

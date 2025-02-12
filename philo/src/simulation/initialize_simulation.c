@@ -6,21 +6,22 @@
 /*   By: hsamir <hsamir@student.42kocaeli.com.tr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 20:24:18 by hsamir            #+#    #+#             */
-/*   Updated: 2025/02/10 15:19:19 by hsamir           ###   ########.fr       */
+/*   Updated: 2025/02/12 21:46:06 by hsamir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/philo.h"
+#include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-#include <stdio.h>
 #include <unistd.h>
 
 int	start_simulation(t_simulation *simulation)
 {
-	int i;
+	int	i;
 
-	if (pthread_create(&simulation->monitor_thread, NULL, monitor_thread, simulation))
+	if (pthread_create(&simulation->monitor_thread, NULL, monitor_thread,
+			simulation))
 		return (FAILURE);
 	i = 0;
 	while (i < simulation->philo_count)
@@ -34,10 +35,10 @@ int	start_simulation(t_simulation *simulation)
 	return (SUCCESS);
 }
 
-pthread_mutex_t* initialize_forks(int fork_count)
+pthread_mutex_t	*initialize_forks(int fork_count)
 {
-	pthread_mutex_t *fork_mutexes;
-	int i;
+	pthread_mutex_t	*fork_mutexes;
+	int				i;
 
 	fork_mutexes = malloc(sizeof(pthread_mutex_t) * fork_count);
 	if (!fork_mutexes)
@@ -55,9 +56,9 @@ pthread_mutex_t* initialize_forks(int fork_count)
 	return (fork_mutexes);
 }
 
-t_simulation    *initialize_simulation(t_sim_config config)
+t_simulation	*initialize_simulation(t_sim_config config)
 {
-	t_simulation    *simulation;
+	t_simulation	*simulation;
 
 	simulation = malloc(sizeof(t_simulation));
 	if (!simulation)
@@ -67,7 +68,8 @@ t_simulation    *initialize_simulation(t_sim_config config)
 	simulation->eat_time_ms = config.eat_time_ms;
 	simulation->sleep_time_ms = config.sleep_time_ms;
 	simulation->max_meals = config.max_meals;
-	simulation->think_time_ms = (config.die_time_ms - (config.sleep_time_ms + config.eat_time_ms)) / 2;
+	simulation->think_time_ms = (config.die_time_ms - (config.sleep_time_ms
+				+ config.eat_time_ms)) / 2;
 	simulation->write_lock = create_mutex();
 	if (!simulation->write_lock)
 		return (abort_simulation(simulation));

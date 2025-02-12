@@ -6,7 +6,7 @@
 /*   By: hsamir <hsamir@student.42kocaeli.com.tr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 13:07:58 by hsamir            #+#    #+#             */
-/*   Updated: 2025/02/12 13:14:00 by hsamir           ###   ########.fr       */
+/*   Updated: 2025/02/12 21:45:42 by hsamir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,10 @@ int	philo_eat(t_philosopher *p)
 	pthread_mutex_t	*first;
 	pthread_mutex_t	*second;
 
-	// first = &p->sim->fork_mutexes[(p->id - (p->id % 2)) % p->sim->philo_count];
-	// second = &p->sim->fork_mutexes[(p->id - !(p->id % 2)) % p->sim->philo_count];
+	// first = &p->sim->fork_mutexes[(p->id - (p->id % 2))
+		//% p->sim->philo_count];
+	// second = &p->sim->fork_mutexes[(p->id - !(p->id % 2))
+		// % p->sim->philo_count];
 	if (p->id % 2)
 	{
 		first = &p->sim->fork_mutexes[p->id % p->sim->philo_count];
@@ -32,14 +34,6 @@ int	philo_eat(t_philosopher *p)
 		first = &p->sim->fork_mutexes[(p->id - 1) % p->sim->philo_count];
 		second = &p->sim->fork_mutexes[p->id % p->sim->philo_count];
 	}
-	// first = &p->sim->fork_mutexes[(p->id - !(p->id == (unsigned int)p->sim->philo_count))
-	// 	% p->sim->philo_count]; // 1 - 1
-	// second = &p->sim->fork_mutexes[(p->id - (p->id == (unsigned int)p->sim->philo_count))
-	// 	% p->sim->philo_count];
-
-
-	// first = &p->sim->fork_mutexes[(p->id - 1) % p->sim->philo_count];
-	// second = &p->sim->fork_mutexes[(p->id) % p->sim->philo_count];
 	pthread_mutex_lock(first);
 	sync_printf("%lld %d has taken a fork\n", p);
 	if (first == second) // im gonna check that
@@ -71,8 +65,8 @@ int	philo_sleep(t_philosopher *philo)
 
 int	philo_think(t_philosopher *philo)
 {
-	int sleep_time;
-	
+	int	sleep_time;
+
 	sync_printf("%lld %d is thinking\n", philo);
 	sleep_time = philo->sim->think_time_ms;
 	if (sleep_time > 0)
