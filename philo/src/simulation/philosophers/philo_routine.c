@@ -6,7 +6,7 @@
 /*   By: hsamir <hsamir@student.42kocaeli.com.tr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 13:07:58 by hsamir            #+#    #+#             */
-/*   Updated: 2025/02/12 23:17:58 by hsamir           ###   ########.fr       */
+/*   Updated: 2025/02/12 23:38:29 by hsamir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,21 +16,19 @@
 int	philo_eat(t_philosopher *p)
 {
 	pthread_mutex_t	*first;
-	pthread_mutex_t	*second;
+	pthread_mutex_t	*sec;
 
-	first = &p->sim->fork_mutexes[(p->id - (p->id % 2))
-		% p->sim->philo_count];
-	second = &p->sim->fork_mutexes[(p->id - !(p->id % 2))
-		% p->sim->philo_count];
+	first = &p->sim->fork_mutexes[(p->id - (p->id % 2)) % p->sim->philo_count];
+	sec = &p->sim->fork_mutexes[(p->id - !(p->id % 2)) % p->sim->philo_count];
 	pthread_mutex_lock(first);
 	sync_printf("%lld %d has taken a fork\n", p);
-	if (first == second)
+	if (first == sec)
 	{
 		msleep(p->sim->die_time_ms - (current_time_ms() - p->sim->start_time));
 		pthread_mutex_unlock(first);
 		return (FAILURE);
 	}
-	pthread_mutex_lock(second);
+	pthread_mutex_lock(sec);
 	if (get_sim_state(p->sim) == RUNNING)
 	{
 		sync_printf("%lld %d has taken a fork\n", p);
@@ -40,7 +38,7 @@ int	philo_eat(t_philosopher *p)
 		msleep(p->sim->eat_time_ms);
 	}
 	pthread_mutex_unlock(first);
-	pthread_mutex_unlock(second);
+	pthread_mutex_unlock(sec);
 	return (SUCCESS && get_sim_state(p->sim) == RUNNING);
 }
 
