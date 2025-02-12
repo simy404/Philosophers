@@ -6,7 +6,7 @@
 /*   By: hsamir <hsamir@student.42kocaeli.com.tr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 12:50:35 by hsamir            #+#    #+#             */
-/*   Updated: 2025/02/12 22:06:48 by hsamir           ###   ########.fr       */
+/*   Updated: 2025/02/12 23:16:24 by hsamir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@ int	main(int argc, char **argv)
 	t_sim_config	config;
 
 	if (argc != 5 && argc != 6)
-		return (printf(ARGUMENT_ERROR));
-	config = parse_arguments(argc,argv);
-	if (config.err || config.philo_count < 1 || config.die_time_ms < 60 || config.eat_time_ms < 60 || config.sleep_time_ms < 60)
-		return (printf(ARGUMENT_ERROR));
+		return (printf(ARG_ERR));
+	config = parse_arguments(argc, argv);
+	if (config.err || config.philo_count < 1 || config.max_meals == 0)
+		return (printf(ARG_ERR));
 	simulation = initialize_simulation(config);
 	if (!simulation)
 		return (printf("Error: Simulation initialization failed\n"));

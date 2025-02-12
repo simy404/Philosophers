@@ -6,7 +6,7 @@
 /*   By: hsamir <hsamir@student.42kocaeli.com.tr>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 21:36:57 by hsamir            #+#    #+#             */
-/*   Updated: 2025/02/12 21:39:04 by hsamir           ###   ########.fr       */
+/*   Updated: 2025/02/12 23:11:42 by hsamir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define PHILO_H
 # include <pthread.h>
 
-# define ARGUMENT_ERROR "Usage: ./philo <philos> <t_die> <t_eat> <t_sleep> [eat_count]\n"
+# define ARG_ERR "Usage: ./philo <philos> <t_die> <t_eat> <t_sleep> [eat_c]\n"
 # define SUCCESS 1
 # define FAILURE 0
 
